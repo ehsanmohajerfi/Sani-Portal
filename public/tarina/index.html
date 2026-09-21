@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>My Story | Ehsan Mohajer</title>
+<meta name="description" content="Ehsan Mohajerin yrittäjyystarina. Ehsan Mohajer's entrepreneurial story.">
+<meta name="theme-color" content="#0b3b38">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/@phosphor-icons/web" defer></script>
+
+<style>
+/* ============ Tokens ============ */
+:root{
+  --ink:#0b2f2d;
+  --ink-2:#12423f;
+  --teal:#0f9d8f;
+  --teal-dark:#0b7a70;
+  --teal-soft:#dff5f1;
+  --paper:#f5f8f7;
+  --white:#fff;
+  --text:#1c2b2a;
+  --muted:#556665;
+  --line:#dbe5e3;
+  --amber:#f2a51a;
+  --amber-soft:#fff3d6;
+  --violet:#7a5af8;
+  --blue:#2f7cf6;
+  --radius:18px;
+  --radius-sm:12px;
+  --shadow:0 1px 2px rgba(11,47,45,.06),0 12px 32px -12px rgba(11,47,45,.18);
+  --font-display:'Fraunces',Georgia,'Times New Roman',serif;
+  --font-body:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --nav-h:68px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--nav-h) + 12px);-webkit-text-size-adjust:100%}
+body{
+  margin:0;font-family:var(--font-body);color:var(--text);background:var(--paper);
+  line-height:1.65;font-size:1.0625rem;overflow-x:hidden;
+  padding-bottom:env(safe-area-inset-bottom,0);
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3,h4{font-family:var(--font-display);line-height:1.15;margin:0;color:var(--ink);letter-spacing:-.01em}
+p{margin:0}
+:focus-visible{outline:3px solid var(--amber);outline-offset:3px;border-radius:6px}
+::selection{background:var(--teal);color:#fff}
+
+/* Language switching */
+html[data-lang="en"] .lang-fi{display:none !important}
+html[data-lang="fi"] .lang-en{display:none !important}
+
+.container{width:min(1140px,100% - 2.5rem);margin-inline:auto}
+section{position:relative}
+.section{padding:clamp(4rem,9vw,7.5rem) 0}
+
+/* ============ Progress bar + Nav ============ */
+#progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--teal),var(--amber));z-index:100}
+.nav{
+  position:fixed;inset:0 0 auto 0;height:var(--nav-h);z-index:90;
+  padding-top:env(safe-area-inset-top,0);
+  background:rgba(245,248,247,.78);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);
+  border-bottom:1px solid transparent;transition:border-color .3s,background .3s;
+}
+.nav.scrolled{border-bottom-color:var(--line);background:rgba(245,248,247,.92)}
+.nav-inner{height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.brand{display:flex;align-items:center;gap:.6rem;text-decoration:none;font-family:var(--font-display);font-weight:700;font-size:1.2rem;color:var(--ink)}
+.brand i{color:var(--teal);font-size:1.6rem}
+.nav-links{display:none;align-items:center;gap:.25rem}
+.nav-links a{
+  text-decoration:none;font-weight:500;font-size:.95rem;color:var(--muted);
+  padding:.5rem .85rem;border-radius:999px;transition:color .2s,background .2s;
+}
+.nav-links a:hover{color:var(--ink);background:rgba(15,157,143,.08)}
+.nav-links a.active{color:var(--teal-dark);background:var(--teal-soft)}
+.lang-toggle{display:inline-flex;background:#e6eeec;border-radius:999px;padding:3px}
+.lang-toggle button{
+  border:0;background:transparent;font:600 .85rem var(--font-body);color:var(--muted);
+  padding:.4rem .85rem;border-radius:999px;cursor:pointer;transition:all .2s;min-height:36px;
+}
+html[data-lang="en"] .lang-toggle [data-set="en"],
+html[data-lang="fi"] .lang-toggle [data-set="fi"]{background:#fff;color:var(--teal-dark);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.menu-btn{border:0;background:transparent;font-size:1.9rem;color:var(--ink);cursor:pointer;display:grid;place-items:center;width:44px;height:44px;border-radius:12px}
+.nav-right{display:flex;align-items:center;gap:.5rem}
+@media(min-width:900px){
+  .nav-links{display:flex}
+  .menu-btn{display:none}
+}
+
+/* Mobile sheet */
+.sheet{
+  position:fixed;inset:0;z-index:120;background:var(--ink);color:#fff;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;gap:1.4rem;
+  opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;
+}
+.sheet.open{opacity:1;visibility:visible}
+.sheet a{font-family:var(--font-display);font-size:1.9rem;font-weight:700;text-decoration:none;color:#fff}
+.sheet a:hover{color:var(--amber)}
+.sheet .close{position:absolute;top:calc(1rem + env(safe-area-inset-top,0));right:1rem;border:0;background:rgba(255,255,255,.1);color:#fff;width:46px;height:46px;border-radius:50%;font-size:1.5rem;cursor:pointer}
+.sheet .lang-toggle{background:rgba(255,255,255,.12);margin-top:1rem}
+.sheet .lang-toggle button{color:#c9dedb;font-size:1rem;padding:.55rem 1.3rem}
+
+/* ============ Hero ============ */
+.hero{
+  min-height:100svh;padding:calc(var(--nav-h) + 2.5rem) 0 4rem;
+  background:
+    radial-gradient(900px 500px at 85% 10%,rgba(15,157,143,.45),transparent 60%),
+    radial-gradient(700px 500px at 0% 100%,rgba(47,124,246,.28),transparent 60%),
+    var(--ink);
+  color:#fff;display:flex;align-items:center;overflow:hidden;
+}
+.hero::before{
+  content:"";position:absolute;inset:0;opacity:.35;pointer-events:none;
+  background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
+  background-size:56px 56px;
+  mask-image:radial-gradient(ellipse at 30% 40%,#000 20%,transparent 75%);
+  -webkit-mask-image:radial-gradient(ellipse at 30% 40%,#000 20%,transparent 75%);
+}
+.hero-grid{position:relative;display:grid;gap:3rem;align-items:center}
+@media(min-width:900px){.hero-grid{grid-template-columns:1.25fr .75fr;gap:4rem}}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:.5rem;padding:.4rem .9rem;border-radius:999px;
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);font-size:.9rem;font-weight:500;margin-bottom:1.4rem;
+}
+.hero-tag i{color:var(--amber)}
+.hero h1{color:#fff;font-size:clamp(2.6rem,7.2vw,5.2rem);font-weight:800;letter-spacing:-.025em;line-height:1.02}
+.hero h1 em{font-style:italic;font-weight:500;color:#8ff0e2}
+.hero-lead{margin-top:1.5rem;max-width:34rem;font-size:clamp(1.05rem,2.2vw,1.25rem);color:rgba(255,255,255,.82)}
+.hero-actions{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:2rem}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.5rem;text-decoration:none;
+  font:600 1rem var(--font-body);padding:.9rem 1.5rem;border-radius:999px;border:1px solid transparent;
+  cursor:pointer;transition:transform .2s,box-shadow .2s,background .2s;min-height:48px;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-light{background:#fff;color:var(--ink)}
+.btn-light:hover{box-shadow:0 10px 30px rgba(255,255,255,.25)}
+.btn-ghost{background:rgba(255,255,255,.08);color:#fff;border-color:rgba(255,255,255,.3)}
+.btn-ghost:hover{background:rgba(255,255,255,.16)}
+.btn-teal{background:var(--teal);color:#fff}
+.btn-teal:hover{background:var(--teal-dark)}
+.btn-outline{background:#fff;color:var(--ink);border-color:var(--line)}
+.btn-outline:hover{border-color:var(--teal);color:var(--teal-dark)}
+
+.hero-photo{position:relative;justify-self:center;width:min(340px,78vw)}
+.hero-photo img{
+  width:100%;aspect-ratio:4/5;object-fit:cover;object-position:top;border-radius:28px;
+  border:1px solid rgba(255,255,255,.25);box-shadow:0 30px 70px -20px rgba(0,0,0,.6);
+}
+.hero-photo::before{
+  content:"";position:absolute;inset:14px -14px -14px 14px;border-radius:28px;
+  border:2px solid var(--amber);z-index:-1;
+}
+.hero-photo .fallback{
+  display:none;aspect-ratio:4/5;border-radius:28px;background:var(--ink-2);place-items:center;font-family:var(--font-display);font-size:5rem;color:#8ff0e2;
+}
+
+.stats{
+  position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:3rem;
+  padding-top:1.6rem;border-top:1px solid rgba(255,255,255,.18);
+}
+.stat b{display:block;font-family:var(--font-display);font-size:clamp(1.7rem,4.5vw,2.8rem);font-weight:800;color:#fff;line-height:1}
+.stat span{display:block;margin-top:.4rem;font-size:.88rem;color:rgba(255,255,255,.7);line-height:1.35}
+
+/* Hero entrance – one orchestrated moment */
+.rise{opacity:0;transform:translateY(22px);animation:rise .9s cubic-bezier(.2,.7,.2,1) forwards}
+.rise:nth-child(2){animation-delay:.12s}
+.rise:nth-child(3){animation-delay:.24s}
+.rise:nth-child(4){animation-delay:.36s}
+@keyframes rise{to{opacity:1;transform:none}}
+
+/* ============ About ============ */
+.about{background:var(--paper)}
+.about-grid{display:grid;gap:2.5rem}
+@media(min-width:900px){.about-grid{grid-template-columns:.8fr 1.2fr;gap:4.5rem;align-items:start}}
+.section-title{font-size:clamp(2rem,5vw,3.2rem);font-weight:800;letter-spacing:-.02em}
+.kicker{display:flex;align-items:center;gap:.7rem;margin-bottom:1rem;font-weight:600;color:var(--teal-dark);font-size:.98rem}
+.kicker::before{content:"";width:34px;height:3px;background:var(--teal);border-radius:3px}
+.about-side{position:sticky;top:calc(var(--nav-h) + 1.5rem)}
+@media(max-width:899px){.about-side{position:static}}
+.facts{display:grid;gap:.8rem;margin-top:1.8rem}
+.fact{display:flex;gap:.9rem;align-items:center;padding:.9rem 1rem;background:#fff;border:1px solid var(--line);border-radius:var(--radius-sm)}
+.fact i{font-size:1.5rem;color:var(--teal);flex:none}
+.fact small{display:block;color:var(--muted);font-size:.8rem;line-height:1.2}
+.fact strong{color:var(--ink);font-weight:600}
+.prose{display:grid;gap:1.15rem;color:var(--muted);max-width:40rem}
+.prose p:first-child{font-size:1.2rem;color:var(--text)}
+.callout{
+  background:#fff;border:1px solid var(--line);border-left:5px solid var(--teal);border-radius:var(--radius-sm);
+  padding:1.25rem 1.4rem;color:var(--text);font-weight:500;
+}
+.link-row{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:2rem}
+
+/* ============ Timeline ============ */
+.story{background:#fff;border-block:1px solid var(--line)}
+.section-head{max-width:44rem;margin-bottom:3.5rem}
+.section-head p{margin-top:1rem;font-size:1.15rem;color:var(--muted)}
+.center-head{margin-inline:auto;text-align:center}
+.center-head .kicker{justify-content:center}
+.center-head .kicker::before{display:none}
+
+.timeline{position:relative;padding-left:2.6rem;display:grid;gap:1.8rem}
+.timeline::before{content:"";position:absolute;left:11px;top:6px;bottom:6px;width:3px;border-radius:3px;background:linear-gradient(var(--teal),var(--blue),var(--amber))}
+.tl{position:relative}
+.tl-dot{
+  position:absolute;left:calc(-2.6rem + 1px);top:1.6rem;width:22px;height:22px;border-radius:50%;
+  background:#fff;border:4px solid var(--c,var(--teal));box-shadow:0 0 0 5px color-mix(in srgb,var(--c,var(--teal)) 18%,transparent);
+}
+.tl-card{
+  background:var(--paper);border:1px solid var(--line);border-top:4px solid var(--c,var(--teal));
+  border-radius:var(--radius);padding:1.5rem;transition:box-shadow .3s,transform .3s;
+}
+.tl-card:hover{box-shadow:var(--shadow);transform:translateY(-3px)}
+.tl-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.6rem;margin-bottom:.9rem}
+.tl-head h3{font-size:clamp(1.3rem,3vw,1.65rem);font-weight:700}
+.badge{
+  font-size:.82rem;font-weight:600;padding:.25rem .75rem;border-radius:999px;white-space:nowrap;
+  color:var(--c,var(--teal-dark));background:color-mix(in srgb,var(--c,var(--teal)) 12%,#fff);border:1px solid color-mix(in srgb,var(--c,var(--teal)) 30%,#fff);
+}
+.tl-card p{color:var(--muted)}
+.gallery{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-top:1.2rem}
+.gallery figure,.photo{margin:0;border-radius:var(--radius-sm);overflow:hidden;border:1px solid var(--line);background:#e8efee}
+.gallery img{width:100%;height:130px;object-fit:cover;transition:transform .5s;cursor:zoom-in}
+.photo{margin-top:1.2rem}
+.photo img{width:100%;max-height:260px;object-fit:cover;cursor:zoom-in;transition:transform .5s}
+.gallery figure:hover img,.photo:hover img{transform:scale(1.04)}
+
+@media(min-width:900px){
+  .timeline{padding-left:0;gap:0}
+  .timeline::before{left:50%;margin-left:-1.5px}
+  .tl{width:50%;padding:0 3rem 2.4rem 0}
+  .tl:nth-child(even){margin-left:50%;padding:0 0 2.4rem 3rem}
+  .tl-dot{left:auto;right:-11px;top:2rem}
+  .tl:nth-child(even) .tl-dot{right:auto;left:-11px}
+  .gallery img{height:150px}
+}
+
+/* Reveal only for timeline + grant + results (subtle) */
+.io{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.io.in{opacity:1;transform:none}
+
+/* ============ Grant ============ */
+.grant{background:var(--paper)}
+.grant-grid{display:grid;gap:3rem}
+@media(min-width:960px){.grant-grid{grid-template-columns:1.05fr .95fr;gap:4.5rem;align-items:center}}
+.steps{display:grid;gap:.4rem;margin-top:2rem;counter-reset:s}
+.step{display:flex;gap:1rem;padding:1rem;border-radius:var(--radius-sm);border:1px solid transparent;transition:background .2s,border-color .2s}
+.step:hover{background:#fff;border-color:var(--line)}
+.step-ico{flex:none;width:48px;height:48px;border-radius:14px;display:grid;place-items:center;font-size:1.5rem;background:var(--bg);color:var(--fg)}
+.step h4{font-size:1.2rem;font-weight:700}
+.step p{color:var(--muted);margin-top:.3rem;font-size:1rem}
+.shot{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:#fff;box-shadow:var(--shadow)}
+.shot img{width:100%;height:auto;cursor:zoom-in}
+.approved{
+  margin-top:1.2rem;display:flex;align-items:center;gap:1rem;padding:1.1rem 1.3rem;border-radius:var(--radius);
+  background:var(--ink);color:#fff;
+}
+.approved i{font-size:2.2rem;color:#8ff0e2}
+.approved b{display:block;font-family:var(--font-display);font-size:1.25rem}
+.approved span{font-size:.92rem;color:rgba(255,255,255,.7)}
+
+/* ============ Results ============ */
+.results{background:#fff;border-top:1px solid var(--line)}
+.results-grid{display:grid;gap:2.5rem}
+@media(min-width:960px){.results-grid{grid-template-columns:.9fr 1.1fr;gap:3.5rem;align-items:start}}
+.bigcard{background:var(--ink);color:#fff;border-radius:var(--radius);padding:2rem}
+.bigcard .num{font-family:var(--font-display);font-size:clamp(3.4rem,10vw,5.2rem);font-weight:800;line-height:1;color:#8ff0e2}
+.bigcard h3{color:#fff;font-size:1.4rem;margin:.7rem 0 .9rem}
+.bigcard p{color:rgba(255,255,255,.78)}
+.takeaway{margin-top:1.2rem;background:var(--amber-soft);border:1px solid #f6dc9c;border-radius:var(--radius);padding:1.2rem 1.4rem}
+.takeaway h4{display:flex;align-items:center;gap:.5rem;font-size:1.1rem;color:#6b4300}
+.takeaway p{margin-top:.5rem;color:#6b4c12;font-size:.98rem}
+.proofs{display:grid;gap:1rem}
+@media(min-width:640px){.proofs{grid-template-columns:1fr 1fr}.proofs .tall{grid-row:span 2}}
+.proof{position:relative;background:#fff;border:1px solid var(--line);border-radius:var(--radius-sm);padding:.5rem;box-shadow:var(--shadow)}
+.proof img{width:100%;height:auto;border-radius:8px;cursor:zoom-in}
+.proof .amt{
+  position:absolute;left:1rem;bottom:1rem;background:rgba(11,47,45,.92);color:#fff;font-weight:600;font-size:.85rem;
+  padding:.35rem .8rem;border-radius:999px;pointer-events:none;
+}
+
+/* ============ Advice ============ */
+.advice{background:var(--ink);color:#fff;overflow:hidden}
+.advice::before{content:"";position:absolute;width:520px;height:520px;right:-160px;top:-160px;border-radius:50%;background:radial-gradient(circle,rgba(15,157,143,.4),transparent 70%)}
+.advice .section-title{color:#fff}
+.advice-grid{position:relative;display:grid;gap:1.2rem;margin-top:2.6rem}
+@media(min-width:800px){.advice-grid{grid-template-columns:repeat(3,1fr)}}
+.tip{padding:1.8rem;border-radius:var(--radius);background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16)}
+.tip .ico{width:54px;height:54px;border-radius:16px;display:grid;place-items:center;font-size:1.7rem;margin-bottom:1.2rem;color:#fff}
+.tip h3{color:#fff;font-size:1.35rem;margin-bottom:.6rem}
+.tip p{color:rgba(255,255,255,.78);font-size:1rem}
+
+/* ============ Contact / Questions ============ */
+.cta{background:var(--teal-soft);text-align:center}
+.cta h2{font-size:clamp(2rem,5vw,3.2rem);font-weight:800}
+.cta p{max-width:34rem;margin:1rem auto 0;color:var(--muted);font-size:1.15rem}
+.cta .link-row{justify-content:center}
+
+/* ============ Footer ============ */
+footer{background:#071f1e;color:#9db8b5;padding:3rem 0 calc(2rem + env(safe-area-inset-bottom,0));text-align:center}
+footer .brand{justify-content:center;color:#fff;margin-bottom:1rem}
+.social{display:flex;justify-content:center;gap:.8rem;margin:1.4rem 0 2rem}
+.social a{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.08);color:#fff;font-size:1.3rem;text-decoration:none;transition:background .2s,transform .2s}
+.social a:hover{background:var(--teal);transform:translateY(-2px)}
+.legal{border-top:1px solid rgba(255,255,255,.1);padding-top:1.5rem;font-size:.88rem}
+
+/* ============ Floating controls ============ */
+#top{
+  position:fixed;right:max(1rem,env(safe-area-inset-right,0));bottom:max(1rem,env(safe-area-inset-bottom,0));z-index:80;
+  width:50px;height:50px;border-radius:50%;border:0;background:var(--teal);color:#fff;font-size:1.3rem;cursor:pointer;
+  box-shadow:0 10px 28px rgba(11,47,45,.35);opacity:0;visibility:hidden;transform:translateY(12px);transition:all .3s;
+}
+#top.show{opacity:1;visibility:visible;transform:none}
+.kbd-hint{
+  position:fixed;left:1rem;bottom:1rem;z-index:80;display:none;align-items:center;gap:.5rem;
+  padding:.45rem .8rem;border-radius:999px;background:rgba(11,47,45,.88);color:#dff5f1;font-size:.8rem;
+}
+.kbd-hint kbd{font:600 .75rem var(--font-body);background:rgba(255,255,255,.16);padding:.1rem .45rem;border-radius:6px}
+@media(min-width:1000px) and (hover:hover){.kbd-hint{display:flex}}
+
+/* Lightbox */
+.lightbox{
+  position:fixed;inset:0;z-index:200;background:rgba(5,20,19,.92);display:flex;align-items:center;justify-content:center;
+  padding:1.5rem;opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s;cursor:zoom-out;
+}
+.lightbox.open{opacity:1;visibility:visible}
+.lightbox img{max-height:90vh;max-width:min(1200px,94vw);border-radius:12px;object-fit:contain;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+.lightbox button{position:absolute;top:calc(1rem + env(safe-area-inset-top,0));right:1rem;width:46px;height:46px;border-radius:50%;border:0;background:rgba(255,255,255,.15);color:#fff;font-size:1.4rem;cursor:pointer}
+
+/* Small phones */
+@media(max-width:480px){
+  body{font-size:1rem}
+  .container{width:min(1140px,100% - 2rem)}
+  .tl-card{padding:1.15rem}
+  .gallery img{height:110px}
+  .btn{width:100%}
+  .hero-actions{flex-direction:column}
+  .link-row .btn{width:100%}
+  .stat span{font-size:.78rem}
+}
+
+/* Reduced motion */
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none !important;transition:none !important}
+  .rise,.io{opacity:1 !important;transform:none !important}
+}
+
+/* Print / PDF */
+@media print{
+  .nav,#progress,#top,.kbd-hint,.sheet,.lightbox{display:none !important}
+  .io,.rise{opacity:1 !important;transform:none !important}
+  .hero{min-height:auto}
+  section{break-inside:avoid}
+}
+</style>
+</head>
+
+<body>
+<div id="progress" aria-hidden="true"></div>
+
+<!-- ============ Navigation ============ -->
+<nav class="nav" id="nav" aria-label="Main">
+  <div class="container nav-inner">
+    <a href="#top-of-page" class="brand"><i class="ph-fill ph-code-block" aria-hidden="true"></i>Ehsan Mohajer</a>
+    <div class="nav-links" id="navLinks">
+      <a href="#about"><span class="lang-en">Who I am</span><span class="lang-fi">Kuka olen</span></a>
+      <a href="#story"><span class="lang-en">The story</span><span class="lang-fi">Tarina</span></a>
+      <a href="#grant"><span class="lang-en">Start-up grant</span><span class="lang-fi">Starttiraha</span></a>
+      <a href="#results"><span class="lang-en">Results</span><span class="lang-fi">Tulokset</span></a>
+      <a href="#advice"><span class="lang-en">Advice</span><span class="lang-fi">Neuvot</span></a>
+    </div>
+    <div class="nav-right">
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button type="button" data-set="en" aria-label="English">EN</button>
+        <button type="button" data-set="fi" aria-label="Suomi">FI</button>
+      </div>
+      <button class="menu-btn" id="menuOpen" aria-label="Open menu" aria-expanded="false"><i class="ph ph-list" aria-hidden="true"></i></button>
+    </div>
+  </div>
+</nav>
+
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Menu">
+  <button class="close" id="menuClose" aria-label="Close menu"><i class="ph ph-x" aria-hidden="true"></i></button>
+  <a href="#about"><span class="lang-en">Who I am</span><span class="lang-fi">Kuka olen</span></a>
+  <a href="#story"><span class="lang-en">The story</span><span class="lang-fi">Tarina</span></a>
+  <a href="#grant"><span class="lang-en">Start-up grant</span><span class="lang-fi">Starttiraha</span></a>
+  <a href="#results"><span class="lang-en">Results</span><span class="lang-fi">Tulokset</span></a>
+  <a href="#advice"><span class="lang-en">Advice</span><span class="lang-fi">Neuvot</span></a>
+  <div class="lang-toggle" role="group" aria-label="Language">
+    <button type="button" data-set="en">EN</button>
+    <button type="button" data-set="fi">FI</button>
+  </div>
+</div>
+
+<main id="top-of-page">
+
+<!-- ============ Hero ============ -->
+<header class="hero" id="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-tag rise"><i class="ph-fill ph-buildings" aria-hidden="true"></i>
+          <span class="lang-en">Founder of Sani Studio</span><span class="lang-fi">Sani Studion perustaja</span>
+        </div>
+        <h1 class="rise">
+          <span class="lang-en">Hi, I'm Ehsan.<br>This is <em>my journey.</em></span>
+          <span class="lang-fi">Hei, olen Ehsan.<br>Tämä on <em>tarinani.</em></span>
+        </h1>
+        <p class="hero-lead rise">
+          <span class="lang-en">From a snowy January arrival in Finland to founding Sani Studio in Jyväskylä: a story about building digital things that work, and what I learned on the way.</span>
+          <span class="lang-fi">Lumisesta tammikuun saapumisesta Suomeen Sani Studion perustamiseen Jyväskylässä: tarina toimivien digitaalisten ratkaisujen rakentamisesta ja siitä, mitä opin matkalla.</span>
+        </p>
+        <div class="hero-actions rise">
+          <a href="#story" class="btn btn-light"><span class="lang-en">Read my story</span><span class="lang-fi">Lue tarinani</span><i class="ph-bold ph-arrow-down" aria-hidden="true"></i></a>
+          <a href="#results" class="btn btn-ghost"><span class="lang-en">Jump to results</span><span class="lang-fi">Siirry tuloksiin</span></a>
+        </div>
+      </div>
+
+      <div class="hero-photo rise">
+        <img src="avatar.png" alt="Ehsan Mohajer" width="340" height="425" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
+        <div class="fallback" aria-hidden="true">E</div>
+      </div>
+    </div>
+
+    <div class="stats rise" aria-label="Key numbers">
+      <div class="stat"><b><span data-count="11">11</span>+</b><span><span class="lang-en">years of work experience abroad</span><span class="lang-fi">vuotta työkokemusta ulkomailta</span></span></div>
+      <div class="stat"><b><span data-count="5">5</span></b><span><span class="lang-en">years living in Finland</span><span class="lang-fi">vuotta Suomessa</span></span></div>
+      <div class="stat"><b>~7k€</b><span><span class="lang-en">earned in the first 2 months</span><span class="lang-fi">tienattu kahdessa ensimmäisessä kuukaudessa</span></span></div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ About ============ -->
+<section id="about" class="section about">
+  <div class="container about-grid">
+    <div class="about-side io">
+      <div class="kicker"><span class="lang-en">Background</span><span class="lang-fi">Taustani</span></div>
+      <h2 class="section-title">
+        <span class="lang-en">Bridging tech and human needs</span>
+        <span class="lang-fi">Teknologia inhimilliseen tarpeeseen</span>
+      </h2>
+      <div class="facts">
+        <div class="fact"><i class="ph-fill ph-map-pin" aria-hidden="true"></i><div><small><span class="lang-en">Location</span><span class="lang-fi">Sijainti</span></small><strong>Jyväskylä, Finland</strong></div></div>
+        <div class="fact"><i class="ph-fill ph-graduation-cap" aria-hidden="true"></i><div><small><span class="lang-en">Studies</span><span class="lang-fi">Opinnot</span></small><strong><span class="lang-en">Master's in Full-Stack Development, JAMK</span><span class="lang-fi">Full-Stack-kehityksen YAMK, JAMK</span></strong></div></div>
+        <div class="fact"><i class="ph-fill ph-briefcase" aria-hidden="true"></i><div><small><span class="lang-en">Company</span><span class="lang-fi">Yritys</span></small><strong>Sani Studio</strong></div></div>
+      </div>
+    </div>
+
+    <div class="io">
+      <div class="prose">
+        <p class="lang-en">Five years ago, in a snowy January, I moved to Finland with my wife, who came to pursue her PhD dream, and our 2.5-year-old child. After passing my Finnish integration courses in less than a year, I wanted to push my boundaries further and update my knowledge.</p>
+        <p class="lang-fi">Viisi vuotta sitten, lumisena tammikuuna, muutin Suomeen vaimoni, joka tuli toteuttamaan tohtorintutkintounelmaansa, ja 2,5-vuotiaan lapsemme kanssa. Suoritettuani kotoutumiskoulutuksen suomen kielen kurssit alle vuodessa, halusin viedä osaamiseni pidemmälle.</p>
+
+        <p class="lang-en">I applied to JAMK here in Jyväskylä for a Master's in Full-Stack Software Development. It gave me a clear vision of the EU market and the real need for creative engineers with fresh mindsets. Through the Talent Boost program, I realized the importance of connecting university knowledge with the real market via traineeships.</p>
+        <p class="lang-fi">Hain Jyväskylän ammattikorkeakouluun (JAMK) suorittamaan Full-Stack-ohjelmistokehityksen ylempää AMK-tutkintoa. Se antoi minulle selkeän näkemyksen EU-markkinoista ja todellisesta tarpeesta luoville, tuoreilla ideoilla varustetuille insinööreille. Talent Boost -ohjelman kautta ymmärsin yliopisto-osaamisen ja aitojen markkinoiden yhdistämisen tärkeyden harjoittelujaksojen avulla.</p>
+
+        <p class="callout lang-en">Before these past 5 years of integrating into Finland, I built a strong foundation with 11 years of professional working experience in my home country. I brought that deep technical expertise here to continue my journey and add value to the Finnish tech ecosystem.</p>
+        <p class="callout lang-fi">Ennen näitä viittä vuotta, joiden aikana olen kotoutunut Suomeen, rakensin vahvan perustan 11 vuoden ammatillisella työkokemuksella kotimaassani. Olen tuonut tuon syvän teknisen osaamisen tänne jatkaakseni matkaani ja tuodakseni lisäarvoa Suomen teknologiaekosysteemiin.</p>
+      </div>
+
+      <div class="link-row">
+        <a href="https://ehsanmohajer.fi/" target="_blank" rel="noopener" class="btn btn-teal"><i class="ph ph-globe" aria-hidden="true"></i><span class="lang-en">Visit Sani Portal</span><span class="lang-fi">Vieraile Sani Portalissa</span></a>
+        <a href="https://www.linkedin.com/in/ehsan-mohajer-k/" target="_blank" rel="noopener" class="btn btn-outline"><i class="ph-fill ph-linkedin-logo" aria-hidden="true"></i><span class="lang-en">Connect on LinkedIn</span><span class="lang-fi">Verkostoidu LinkedInissä</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Story timeline ============ -->
+<section id="story" class="section story">
+  <div class="container">
+    <div class="section-head center-head io">
+      <div class="kicker"><i class="ph-fill ph-rocket-launch" aria-hidden="true"></i><span class="lang-en">The entrepreneurial path</span><span class="lang-fi">Yrittäjän polku</span></div>
+      <h2 class="section-title"><span class="lang-en">Building Sani Studio</span><span class="lang-fi">Sani Studion rakentaminen</span></h2>
+      <p><span class="lang-en">How a vision for clear, purposeful digital solutions became a reality in Central Finland.</span><span class="lang-fi">Miten visio selkeistä, tarkoituksenmukaisista digitaalisista ratkaisuista muuttui todeksi Keski-Suomessa.</span></p>
+    </div>
+
+    <div class="timeline">
+      <!-- Step 1 -->
+      <article class="tl io" style="--c:#14b8a6">
+        <span class="tl-dot"></span>
+        <div class="tl-card">
+          <div class="tl-head">
+            <h3><span class="lang-en">Project Specialist at Witas</span><span class="lang-fi">Projektiasiantuntija Witas Oy:ssä</span></h3>
+            <span class="badge"><span class="lang-en">Step 1</span><span class="lang-fi">Vaihe 1</span></span>
+          </div>
+          <p>
+            <span class="lang-en">I worked as a Project Specialist at Witas (Digikeskus) alongside Tatu for nearly a year. A major highlight was hosting the AI Hackathon in Central Finland. I helped students manage their teamwork, discover solid solutions for companies, and show their full potential. Some students even successfully sold their solutions and secured hiring opportunities!</span>
+            <span class="lang-fi">Työskentelin projektiasiantuntijana Witas Oy:ssä (Digikeskus) Tatun kanssa vajaan vuoden ajan. Yksi kohokohdista oli tekoäly-Hackathonin isännöinti Keski-Suomessa. Autoin opiskelijoita tiimityössä, yritysten haasteiden ratkaisemisessa ja heidän täyden potentiaalinsa esiin tuomisessa. Osa opiskelijoista onnistui myymään ratkaisunsa ja saamaan työmahdollisuuksia!</span>
+          </p>
+          <div class="gallery">
+            <figure><img src="HackathonVol4-02.jpg" alt="AI Hackathon team" loading="lazy" data-zoom></figure>
+            <figure><img src="P1221575.jpg" alt="Ehsan at Digikeskus" loading="lazy" data-zoom></figure>
+            <figure><img src="P1221595.jpg" alt="Digikeskus event presentation" loading="lazy" data-zoom></figure>
+            <figure><img src="Gemini_Generated_Image_h9mz6hh9mz6hh9mz.png" alt="AI Hackathon mentoring session" loading="lazy" data-zoom></figure>
+          </div>
+        </div>
+      </article>
+
+      <!-- Step 2 -->
+      <article class="tl io" style="--c:#7a5af8">
+        <span class="tl-dot"></span>
+        <div class="tl-card">
+          <div class="tl-head">
+            <h3><span class="lang-en">Mentoring and foundation</span><span class="lang-fi">Mentorointi ja perustan rakentaminen</span></h3>
+            <span class="badge"><span class="lang-en">Step 2</span><span class="lang-fi">Vaihe 2</span></span>
+          </div>
+          <p>
+            <span class="lang-en">During my journey, I participated in entrepreneurship courses in Tampere, which gave me an excellent vision for starting and scaling a business. I also dedicated time to mentoring, helping students get familiar with the work and life culture here in Finland. It was rewarding to guide others while expanding my own network.</span>
+            <span class="lang-fi">Matkani varrella osallistuin yrittäjyyskursseille Tampereella, mikä antoi minulle erinomaisen näkemyksen liiketoiminnan aloittamisesta. Omistin aikaa myös mentorointiin, auttaen opiskelijoita tutustumaan Suomen työ- ja elämänkulttuuriin. Oli palkitsevaa ohjata muita ja samalla laajentaa omaa verkostoani.</span>
+          </p>
+          <div class="photo"><img src="WhatsApp Image 2026-05-04 at 10.51.59.jpeg" alt="Mentoring session" loading="lazy" data-zoom></div>
+        </div>
+      </article>
+
+      <!-- Step 3 -->
+      <article class="tl io" style="--c:#2f7cf6">
+        <span class="tl-dot"></span>
+        <div class="tl-card">
+          <div class="tl-head">
+            <h3><span class="lang-en">Finding the "sign"</span><span class="lang-fi">Kipinä yrittäjyyteen</span></h3>
+            <span class="badge"><span class="lang-en">Step 3</span><span class="lang-fi">Vaihe 3</span></span>
+          </div>
+          <p>
+            <span class="lang-en">Seeing the inner workings and challenges of a Finnish company gave me a clear vision of working life here. While I applied for several jobs, Viitasaari and Digikeskus gave me the ultimate "sign": the push to realize my potential to work on my own.</span>
+            <span class="lang-fi">Suomalaisen yrityksen toiminnan ja haasteiden näkeminen antoi minulle selkeän kuvan työelämästä täällä. Vaikka hain useita työpaikkoja, Viitasaari ja Digikeskus antoivat minulle "merkin": sysäyksen ymmärtää potentiaalini itseni työllistämiseen.</span>
+          </p>
+        </div>
+      </article>
+
+      <!-- Launch -->
+      <article class="tl io" style="--c:#f2a51a">
+        <span class="tl-dot"></span>
+        <div class="tl-card">
+          <div class="tl-head">
+            <h3><span class="lang-en">Taking the first steps</span><span class="lang-fi">Ensimmäiset askeleet</span></h3>
+            <span class="badge"><span class="lang-en">Launch</span><span class="lang-fi">Lanseeraus</span></span>
+          </div>
+          <p>
+            <span class="lang-en">Entrepreneurship is like climbing stairs. At the first step, you are like a newborn baby: you just have an idea. Then you decide to implement it and get the benefit. Today, my company isn't completely finished, but it's working, and my main work will start with full power in a couple of weeks!</span>
+            <span class="lang-fi">Yrittäjyys on kuin portaiden nousemista. Ensimmäisellä askelmalla olet kuin vastasyntynyt: sinulla on vasta idea. Sitten päätät toteuttaa sen ja kerätä hedelmät. Tänään yritykseni ei ole vielä täysin valmis, mutta se toimii, ja varsinainen työ alkaa täydellä teholla parin viikon kuluttua!</span>
+          </p>
+          <div class="photo"><img src="sanistudio.png" alt="Sani Studio work" loading="lazy" data-zoom></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Grant ============ -->
+<section id="grant" class="section grant">
+  <div class="container grant-grid">
+    <div class="io">
+      <div class="kicker"><span class="lang-en">Practical steps</span><span class="lang-fi">Käytännön askeleet</span></div>
+      <h2 class="section-title"><span class="lang-en">Securing the Start-up Grant</span><span class="lang-fi">Starttirahan saaminen</span></h2>
+      <p style="margin-top:1rem;font-size:1.15rem;color:var(--muted)">
+        <span class="lang-en">The Finnish Start-up grant (Starttiraha) is a vital boost for new entrepreneurs. Here is how I navigated the process to get my business (Business ID: 3651323-8) off the ground.</span>
+        <span class="lang-fi">Starttiraha on elintärkeä tuki uusille yrittäjille. Tässä on katsaus siihen, miten navigoin prosessin läpi saadakseni yritykseni (Y-tunnus: 3651323-8) vauhtiin.</span>
+      </p>
+
+      <div class="steps">
+        <div class="step" style="--bg:#d7f5ef;--fg:#0b7a70">
+          <div class="step-ico"><i class="ph-fill ph-file-text" aria-hidden="true"></i></div>
+          <div>
+            <h4><span class="lang-en">1. The business plan</span><span class="lang-fi">1. Liiketoimintasuunnitelma</span></h4>
+            <p><span class="lang-en">Detail the services (full-stack development, AI), identify target clients locally and globally, and prove profitability with clear financial calculations.</span><span class="lang-fi">Palveluiden (full-stack-kehitys, tekoäly) yksilöinti, kohdeasiakkaiden tunnistaminen paikallisesti ja maailmanlaajuisesti sekä kannattavuuden osoittaminen selkeillä laskelmilla.</span></p>
+          </div>
+        </div>
+        <div class="step" style="--bg:#dfeafe;--fg:#1d5fd0">
+          <div class="step-ico"><i class="ph-fill ph-users-three" aria-hidden="true"></i></div>
+          <div>
+            <h4><span class="lang-en">2. Advising and sparring</span><span class="lang-fi">2. Neuvonta ja sparraus</span></h4>
+            <p><span class="lang-en">Work with local enterprise agencies in Jyväskylä. Discussing the idea out loud helps validate whether the market actually needs your solution.</span><span class="lang-fi">Työskentely paikallisten yritysneuvontapalveluiden kanssa Jyväskylässä. Idean ääneen pohtiminen auttaa vahvistamaan, tarvitseeko markkina todella ratkaisuasi.</span></p>
+          </div>
+        </div>
+        <div class="step" style="--bg:#fff0cc;--fg:#a86500">
+          <div class="step-ico"><i class="ph-fill ph-handshake" aria-hidden="true"></i></div>
+          <div>
+            <h4><span class="lang-en">3. The application (TE Services)</span><span class="lang-fi">3. Hakemus (TE-palvelut)</span></h4>
+            <p><span class="lang-en">Submit the finalized plan. The key is showing that you have the skills, like my technical and project background, to carry it out successfully.</span><span class="lang-fi">Valmiin suunnitelman lähettäminen. Avainasemassa on osoittaa, että sinulla on taidot, kuten oma tekninen ja projektitaustani, suunnitelman onnistuneeseen toteuttamiseen.</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="io">
+      <div class="shot"><img src="image_4818fc.png" alt="Start-up grant decision from the City of Jyväskylä" loading="lazy" data-zoom></div>
+      <div class="approved">
+        <i class="ph-fill ph-seal-check" aria-hidden="true"></i>
+        <div>
+          <b><span class="lang-en">Status: Approved</span><span class="lang-fi">Tila: Hyväksytty</span></b>
+          <span>Jyväskylän kaupunki</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Results ============ -->
+<section id="results" class="section results">
+  <div class="container">
+    <div class="section-head center-head io">
+      <div class="kicker"><i class="ph-fill ph-chart-line-up" aria-hidden="true"></i><span class="lang-en">Real results</span><span class="lang-fi">Todelliset tulokset</span></div>
+      <h2 class="section-title"><span class="lang-en">The financial reality</span><span class="lang-fi">Taloudellinen todellisuus</span></h2>
+      <p><span class="lang-en">Taking the leap into entrepreneurship can be daunting, but it is also highly rewarding. Here is a transparent look at my earnings in just the first two months.</span><span class="lang-fi">Yrittäjyyteen hyppääminen voi hirvittää, mutta se on myös erittäin palkitsevaa. Tässä on läpinäkyvä katsaus tuloihini vain kahden ensimmäisen kuukauden aikana.</span></p>
+    </div>
+
+    <div class="results-grid">
+      <div class="io">
+        <div class="bigcard">
+          <div class="num">~7,000€</div>
+          <h3><span class="lang-en">Earned in 2 months</span><span class="lang-fi">Tienattu 2 kuukaudessa</span></h3>
+          <p><span class="lang-en">This isn't to brag, but to show what is possible when you apply your skills directly to the market. When you work for yourself, the value you create comes directly back to you.</span><span class="lang-fi">Tarkoitukseni ei ole kerskua, vaan näyttää, mikä on mahdollista, kun viet taitosi suoraan markkinoille. Kun teet töitä itsellesi, luomasi arvo palautuu suoraan sinulle.</span></p>
+        </div>
+        <div class="takeaway">
+          <h4><i class="ph-fill ph-lightbulb" aria-hidden="true"></i><span class="lang-en">Key takeaway</span><span class="lang-fi">Tärkein oivallus</span></h4>
+          <p><span class="lang-en">The risk of starting is often smaller than the risk of never trying. Your technical skills are in high demand.</span><span class="lang-fi">Aloittamisen riski on usein pienempi kuin riski olla koskaan yrittämättä. Tekniselle osaamisellesi on suuri kysyntä.</span></p>
+        </div>
+      </div>
+
+      <div class="proofs io">
+        <div class="proof tall">
+          <img src="Screenshot 2026-09-21 110548.png" alt="Total earnings summary" loading="lazy" data-zoom>
+          <span class="amt"><span class="lang-en">Total: 6,930.20 €</span><span class="lang-fi">Yhteensä: 6 930,20 €</span></span>
+        </div>
+        <div class="proof">
+          <img src="Screenshot 2026-09-21 110400.png" alt="Payment receipt 1" loading="lazy" data-zoom>
+          <span class="amt"><span class="lang-en">Payment: 3,405.60 €</span><span class="lang-fi">Maksu: 3 405,60 €</span></span>
+        </div>
+        <div class="proof">
+          <img src="Screenshot 2026-09-21 110304.png" alt="Payment receipt 2" loading="lazy" data-zoom>
+          <span class="amt"><span class="lang-en">Payment: 873.23 €</span><span class="lang-fi">Maksu: 873,23 €</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Advice ============ -->
+<section id="advice" class="section advice">
+  <div class="container">
+    <h2 class="section-title io"><span class="lang-en">My advice to you</span><span class="lang-fi">Neuvoni sinulle</span></h2>
+    <div class="advice-grid">
+      <div class="tip io">
+        <div class="ico" style="background:#14b8a6"><i class="ph-bold ph-lightbulb" aria-hidden="true"></i></div>
+        <h3><span class="lang-en">Focus on the problem</span><span class="lang-fi">Keskity ongelmaan</span></h3>
+        <p><span class="lang-en">Don't just build technology. Build solutions to real business needs. Listening is your best tool.</span><span class="lang-fi">Älä vain rakenna teknologiaa. Rakenna ratkaisuja todellisiin tarpeisiin. Kuunteleminen on paras työkalusi.</span></p>
+      </div>
+      <div class="tip io">
+        <div class="ico" style="background:#2f7cf6"><i class="ph-bold ph-chat-teardrop-text" aria-hidden="true"></i></div>
+        <h3><span class="lang-en">Ask for feedback</span><span class="lang-fi">Pyydä palautetta</span></h3>
+        <p><span class="lang-en">Use advisors for your business plan, and test your ideas with real users early. Clarity comes from collaboration.</span><span class="lang-fi">Käytä neuvonantajia suunnitelmaasi ja testaa ideoita aidoilla käyttäjillä ajoissa. Selkeys syntyy yhteistyöstä.</span></p>
+      </div>
+      <div class="tip io">
+        <div class="ico" style="background:#f2a51a"><i class="ph-bold ph-rocket" aria-hidden="true"></i></div>
+        <h3><span class="lang-en">Start the work</span><span class="lang-fi">Aloita työnteko</span></h3>
+        <p><span class="lang-en">Planning is crucial, but eventually, you have to launch. Build incrementally and validate as you go.</span><span class="lang-fi">Suunnittelu on tärkeää, mutta lopulta on aloitettava. Rakenna vaiheittain ja validoi matkan varrella.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Questions ============ -->
+<section id="contact" class="section cta">
+  <div class="container io">
+    <h2><span class="lang-en">Questions? Let's talk.</span><span class="lang-fi">Kysyttävää? Puhutaan.</span></h2>
+    <p><span class="lang-en">Thinking about starting your own thing, or want to know more about the grant process? Reach out any time.</span><span class="lang-fi">Mietitkö oman yrityksen aloittamista tai haluatko tietää lisää starttirahasta? Ota yhteyttä milloin vain.</span></p>
+    <div class="link-row">
+      <a href="mailto:ehsanmohajer.fi@gmail.com" class="btn btn-teal"><i class="ph-fill ph-envelope-simple" aria-hidden="true"></i><span class="lang-en">Send an email</span><span class="lang-fi">Lähetä sähköposti</span></a>
+      <a href="https://www.linkedin.com/in/ehsan-mohajer-k/" target="_blank" rel="noopener" class="btn btn-outline"><i class="ph-fill ph-linkedin-logo" aria-hidden="true"></i>LinkedIn</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ============ Footer ============ -->
+<footer>
+  <div class="container">
+    <div class="brand"><i class="ph-fill ph-code-block" aria-hidden="true"></i>Ehsan Mohajer</div>
+    <p><span class="lang-en">Thank you for your interest! Connecting in Jyväskylä and beyond.</span><span class="lang-fi">Kiitos mielenkiinnosta! Verkostoidutaan Jyväskylässä ja muualla.</span></p>
+    <div class="social">
+      <a href="https://ehsanmohajer.fi/" target="_blank" rel="noopener" title="Sani Portal" aria-label="Sani Portal"><i class="ph-fill ph-globe" aria-hidden="true"></i></a>
+      <a href="https://www.linkedin.com/in/ehsan-mohajer-k/" target="_blank" rel="noopener" title="LinkedIn" aria-label="LinkedIn"><i class="ph-fill ph-linkedin-logo" aria-hidden="true"></i></a>
+      <a href="mailto:ehsanmohajer.fi@gmail.com" title="Email" aria-label="Email"><i class="ph-fill ph-envelope-simple" aria-hidden="true"></i></a>
+    </div>
+    <p class="legal">&copy; 2026 Ehsan Mohajer. Sani Portal. &nbsp;Business ID / Y-tunnus: 3651323-8</p>
+  </div>
+</footer>
+
+<button id="top" aria-label="Back to top"><i class="ph-bold ph-arrow-up" aria-hidden="true"></i></button>
+<div class="kbd-hint" aria-hidden="true"><kbd>←</kbd><kbd>→</kbd> <span class="lang-en">jump between sections</span><span class="lang-fi">siirry osioiden välillä</span></div>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image preview">
+  <button aria-label="Close image"><i class="ph ph-x" aria-hidden="true"></i></button>
+  <img alt="">
+</div>
+
+<script>
+(function(){
+  var doc = document.documentElement;
+  var $ = function(s,c){return (c||document).querySelector(s)};
+  var $$ = function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s))};
+
+  /* ---- Language (remembered, with safe storage) ---- */
+  function setLang(l){
+    doc.setAttribute('data-lang', l);
+    doc.setAttribute('lang', l);
+    try{ localStorage.setItem('lang', l); }catch(e){}
+  }
+  var saved = null;
+  try{ saved = localStorage.getItem('lang'); }catch(e){}
+  if(saved === 'fi' || saved === 'en') setLang(saved);
+  else if((navigator.language||'').toLowerCase().indexOf('fi') === 0) setLang('fi');
+  $$('[data-set]').forEach(function(b){
+    b.addEventListener('click', function(){ setLang(b.getAttribute('data-set')); });
+  });
+
+  /* ---- Mobile menu ---- */
+  var sheet = $('#sheet'), openBtn = $('#menuOpen');
+  function toggleMenu(open){
+    sheet.classList.toggle('open', open);
+    openBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+  openBtn.addEventListener('click', function(){ toggleMenu(true); });
+  $('#menuClose').addEventListener('click', function(){ toggleMenu(false); });
+  $$('#sheet a').forEach(function(a){ a.addEventListener('click', function(){ toggleMenu(false); }); });
+
+  /* ---- Scroll: progress, nav state, back-to-top ---- */
+  var progress = $('#progress'), nav = $('#nav'), topBtn = $('#top');
+  var ticking = false;
+  function onScroll(){
+    var y = window.scrollY || window.pageYOffset;
+    var h = doc.scrollHeight - window.innerHeight;
+    progress.style.width = (h > 0 ? (y / h) * 100 : 0) + '%';
+    nav.classList.toggle('scrolled', y > 20);
+    topBtn.classList.toggle('show', y > 600);
+    ticking = false;
+  }
+  window.addEventListener('scroll', function(){
+    if(!ticking){ ticking = true; requestAnimationFrame(onScroll); }
+  }, {passive:true});
+  onScroll();
+  topBtn.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
+
+  /* ---- Reveal on view ---- */
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold:.12, rootMargin:'0px 0px -40px 0px'});
+  $$('.io').forEach(function(el){ io.observe(el); });
+
+  /* ---- Active nav link ---- */
+  var sections = ['about','story','grant','results','advice'].map(function(id){return document.getElementById(id)});
+  var links = $$('#navLinks a');
+  var spy = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        links.forEach(function(a){ a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id); });
+      }
+    });
+  }, {rootMargin:'-45% 0px -50% 0px'});
+  sections.forEach(function(s){ if(s) spy.observe(s); });
+
+  /* ---- Count-up numbers in hero ---- */
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduce){
+    $$('[data-count]').forEach(function(el){
+      var target = parseInt(el.getAttribute('data-count'), 10), start = null;
+      function step(t){
+        if(!start) start = t;
+        var p = Math.min((t - start) / 1200, 1);
+        el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+        if(p < 1) requestAnimationFrame(step);
+      }
+      el.textContent = '0';
+      setTimeout(function(){ requestAnimationFrame(step); }, 500);
+    });
+  }
+
+  /* ---- Lightbox ---- */
+  var lb = $('#lightbox'), lbImg = $('img', lb);
+  function closeLb(){ lb.classList.remove('open'); }
+  document.addEventListener('click', function(e){
+    var img = e.target.closest && e.target.closest('img[data-zoom]');
+    if(img){ lbImg.src = img.currentSrc || img.src; lbImg.alt = img.alt; lb.classList.add('open'); }
+  });
+  lb.addEventListener('click', closeLb);
+
+  /* ---- Broken images: hide gracefully ---- */
+  $$('img[data-zoom]').forEach(function(img){
+    img.addEventListener('error', function(){
+      var box = img.closest('figure, .photo, .shot, .proof');
+      if(box) box.style.display = 'none';
+    });
+  });
+
+  /* ---- Presenting: arrow keys jump between sections ---- */
+  var order = ['hero','about','story','grant','results','advice','contact'];
+  function currentIndex(){
+    var y = window.scrollY + window.innerHeight * 0.35, idx = 0;
+    order.forEach(function(id, i){
+      var el = document.getElementById(id);
+      if(el && el.getBoundingClientRect().top + window.scrollY <= y) idx = i;
+    });
+    return idx;
+  }
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape'){ closeLb(); toggleMenu(false); return; }
+    if(e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
+    if(lb.classList.contains('open')) return;
+    var t = e.target.tagName;
+    if(t === 'INPUT' || t === 'TEXTAREA') return;
+    if(e.key === 'ArrowRight' || e.key === 'ArrowLeft'){
+      var i = currentIndex() + (e.key === 'ArrowRight' ? 1 : -1);
+      i = Math.max(0, Math.min(order.length - 1, i));
+      var el = document.getElementById(order[i]);
+      if(el){ e.preventDefault(); el.scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block:'start'}); }
+    }
+  });
+})();
+</script>
+</body>
+</html>
